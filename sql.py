@@ -17,6 +17,7 @@ class Connection:
         self.cursor.execute("""
         CREATE DATABASE IF NOT EXISTS todolist;
         """)
+        self.conn.commit()
 
     def create_table(self):
         self.cursor.execute("""
@@ -28,6 +29,7 @@ class Connection:
         `archived` TINYINT DEFAULT 0,
         PRIMARY KEY (`id`));
         """)
+        self.conn.commit()
 
     def insert_entry(self, desc):
         self.cursor.execute(f"""
@@ -39,11 +41,13 @@ class Connection:
         self.cursor.execute("""
         SELECT * FROM `todolist`.`items` WHERE archived = 0;
         """)
+        return self.cursor.fetchall()
 
     def retrieve_all(self):
         self.cursor.execute("""
         SELECT * FROM `todolist`.`items`;
         """)
+        return self.cursor.fetchall()
 
     def update_archive_status(self, entryid):
         self.cursor.execute(f"""

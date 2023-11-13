@@ -6,5 +6,5 @@ import sys
 
 
 dbconn = sql.Connection()
-#dbconn.insert_entry("some new entry")
+dbconn.insert_entry("some newer entry")
 dbconn.update_archive_status(2)
