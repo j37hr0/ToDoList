@@ -25,7 +25,7 @@ class Connection:
         `id` INT NOT NULL AUTO_INCREMENT,
         `itemname` VARCHAR(45) NULL,
         `dateadded` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-        `currentstatus` TINYINT DEFAULT 1,
+        `currentstatus` TINYINT DEFAULT 0,
         `archived` TINYINT DEFAULT 0,
         PRIMARY KEY (`id`));
         """)
@@ -39,13 +39,13 @@ class Connection:
 
     def retrieve_non_archived(self):
         self.cursor.execute("""
-        SELECT * FROM `todolist`.`items` WHERE archived = 0;
+        SELECT itemname, dateadded, currentstatus FROM `todolist`.`items` WHERE archived = 0;
         """)
         return self.cursor.fetchall()
 
     def retrieve_all(self):
         self.cursor.execute("""
-        SELECT * FROM `todolist`.`items`;
+        SELECT itemname, dateadded, currentstatus FROM `todolist`.`items`;
         """)
         return self.cursor.fetchall()
 
